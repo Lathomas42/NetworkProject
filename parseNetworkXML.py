@@ -25,7 +25,7 @@ def getDateAffils(usedIDs, fn='pubmed_result.xml'):
             if ID not in usedIDs:
                 #usedIDs.append(ID)
                 mcitArt = mCit.find('Article')
-                date = mCit.find('DateCompleted')
+                date = mCit.find('DateCreated')
                 authlist = mcitArt.find('AuthorList')
                 date_affils = [date]
                 if authlist is not None:
@@ -36,9 +36,9 @@ def getDateAffils(usedIDs, fn='pubmed_result.xml'):
                     if(len(date_affils) > 2):
                         # writer.writerow(date_affils)
                         if date_affils[0] is None:
-                            date = [0, 0, 0]
+                            date = [ID, 0, 0, 0]
                         else:
-                            date = [date_affils[0][0].text,
+                            date = [ID, date_affils[0][0].text,
                                     date_affils[0][1].text,
                                     date_affils[0][2].text]
                         for item in date_affils[1:]:
